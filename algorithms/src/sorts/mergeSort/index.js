@@ -41,10 +41,10 @@ const sortedB4 = [3, 7, 8, 10];
 const expectedMerge4 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 /**
- * Efficiently merges two already sorted arrays into a new sorted array.
- * Do not mutate the given arrays.
- * - Time: O(?).
- * - Space: O(?).
+ * Merges two already sorted arrays into a new sorted array.
+ * - Time: O(n + m) -> O(n) linear n = left.length, m = right.length.
+ *    Every item from each array is visited once.
+ * - Space: O(n + m) -> O(n) linear.
  * @param {Array<number>} left
  * @param {Array<number>} right
  * @returns {Array<number>} A new sorted array containing all the elements of
@@ -81,11 +81,9 @@ console.log(merge(sortedA2, sortedB2))
 console.log(merge(sortedA3, sortedB3))
 console.log(merge(sortedA4, sortedB4))
 
-// mergeSort
-const numbersOrdered = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const numbersRandomOrder = [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
-const numbersReversed = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-const expectedSort = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  // one liner version of adding in any left over items
+  // return result.concat(left.slice(indexLeft)).concat(right.slice(indexRight));
+}
 
 /**
  * Creates a new sorted array based on the given numbers being recursively split
@@ -96,4 +94,16 @@ const expectedSort = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  * @param {Array<number>} numbers
  * @returns {Array<number>} A New sorted array.
  */
-function mergeSort(numbers = []) {}
+function mergeSort(numbers = []) {
+  if (numbers.length === 1) {
+    // return once we hit an array with a single item
+    return numbers;
+  }
+
+  const middleIdx = Math.floor(numbers.length / 2);
+  const left = numbers.slice(0, middleIdx);
+  const right = numbers.slice(middleIdx);
+  const sortedLeft = mergeSort(left);
+  const sortedRight = mergeSort(right);
+  return merge(sortedLeft, sortedRight);
+}
