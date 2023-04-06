@@ -56,4 +56,28 @@ const numbers4 = [2, 1];
  *    being processed.
  * @returns {number} The idx where left section of smaller items ends.
  */
-function partition(numbers = [], left = 0, right = numbers.length - 1) {}
+function partition(numbers = [], left = 0, right = numbers.length - 1) { 
+  const pivotIdx = Math.floor((left+ right)/2);
+  const pivot = numbers[pivotIdx];
+  let temp;
+  let i = left;
+  let j = right;
+  while(i <= pivotIdx && j >= pivotIdx){
+    console.log(`Nums ${numbers}\nPivot ${pivot}`)
+      if(numbers[i] >= pivot){
+          temp = numbers[i];
+          console.log(`Temp > ${temp}`);
+      } else {
+          i++;
+      }
+      if(numbers[j] <= pivot){
+          console.log(`Num[j] > ${numbers[j]}`);
+          numbers[i] = numbers[j];
+          numbers[j] = temp;
+      } else {
+          j--;
+      }
+  }
+  return numbers;
+}
+console.log(partition(numbers1));
