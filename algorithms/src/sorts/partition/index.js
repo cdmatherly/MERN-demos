@@ -60,8 +60,34 @@ const numbers4 = [2, 1];
  * @param {number} right The index indicating the end of the slice of array
  *    being processed.
  * @returns {number} The index where the smaller section ends.
- */
-function partition(numbers, leftIdx = 0, rightIdx = numbers.length - 1) {
+*/
+function partition(numbers = [], left = 0, right = numbers.length - 1) { 
+  const pivotIdx = Math.floor((left+ right)/2);
+  const pivot = numbers[pivotIdx];
+  let temp;
+  let i = left;
+  let j = right;
+  while(i <= pivotIdx && j >= pivotIdx){
+    console.log(`Nums ${numbers}\nPivot ${pivot}`)
+      if(numbers[i] >= pivot){
+          temp = numbers[i];
+          console.log(`Temp > ${temp}`);
+      } else {
+          i++;
+      }
+      if(numbers[j] <= pivot){
+          console.log(`Num[j] > ${numbers[j]}`);
+          numbers[i] = numbers[j];
+          numbers[j] = temp;
+      } else {
+          j--;
+      }
+  }
+  return numbers;
+}
+// console.log(partition(numbers1));
+
+function partition2(numbers, leftIdx = 0, rightIdx = numbers.length - 1) {
   const midIdx = Math.floor((leftIdx + rightIdx) / 2);
   const pivotValue = numbers[midIdx];
   const tempPivotIdx = rightIdx;
@@ -102,6 +128,8 @@ function partition(numbers, leftIdx = 0, rightIdx = numbers.length - 1) {
   }
 }
 
+console.log(partition2(numbers1));
+
 /**
  * The lomuto partition scheme does on average 3x more swaps than Hoare's
  * scheme.
@@ -109,28 +137,26 @@ function partition(numbers, leftIdx = 0, rightIdx = numbers.length - 1) {
  * @param {number} low Start of section to partition.
  * @param {number} hi End of section to partition.
  */
-function partition(numbers = [], left = 0, right = numbers.length - 1) { 
-  const pivotIdx = Math.floor((left+ right)/2);
-  const pivot = numbers[pivotIdx];
-  let temp;
-  let i = left;
-  let j = right;
-  while(i <= pivotIdx && j >= pivotIdx){
-    console.log(`Nums ${numbers}\nPivot ${pivot}`)
-      if(numbers[i] >= pivot){
-          temp = numbers[i];
-          console.log(`Temp > ${temp}`);
-      } else {
-          i++;
-      }
-      if(numbers[j] <= pivot){
-          console.log(`Num[j] > ${numbers[j]}`);
-          numbers[i] = numbers[j];
-          numbers[j] = temp;
-      } else {
-          j--;
-      }
+
+function partitionLomuto(numbers = [], low = 0, hi = numbers.length - 1) {
+  const pivot = numbers[hi];
+  let i = low - 1;
+
+  for (let j = low; j < hi; j++) {
+    if (numbers[j] <= pivot) {
+      i += 1;
+      [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+    }
   }
-  return numbers;
+
+  // final swap of pivot into correct position
+  [numbers[i + 1], numbers[hi]] = [numbers[hi], numbers[i + 1]];
+  return i + 1;
 }
-console.log(partition(numbers1));
+
+console.log(partitionLomuto(numbers1))
+
+module.exports = {
+  partition: partition,
+  // partitionLomuto: partitionLomuto
+};
