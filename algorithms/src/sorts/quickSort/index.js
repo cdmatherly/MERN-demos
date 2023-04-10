@@ -28,7 +28,7 @@
         (right of the returned partition idx), recursively.
 */
 
-const { partition } = require('../partition');
+const { partition2 } = require('../partition');
 
 const numbers1 = [11, 8, 14, 3, 6, 2, 7];
 const expected1 = [2, 3, 6, 7, 8, 11, 14];
@@ -56,4 +56,16 @@ const expected4 = [1, 3, 4, 9, 12, 13, 17, 21, 27];
  *    given array being processed.
  * @returns {Array<number>} The given array after being sorted.
  */
-function quickSort(numbers = [], left = 0, right = numbers.length - 1) {}
+function quickSort(numbers = [], left = 0, right = numbers.length - 1) {
+    if(left < right){
+        let pivotIdx = partition2(numbers, left, right)
+        quickSort(numbers, left, pivotIdx-1)
+        quickSort(numbers, pivotIdx+1, right)
+    }
+    return numbers
+}
+
+console.log(quickSort(numbers1))
+console.log(quickSort(numbers2))
+console.log(quickSort(numbers3))
+console.log(quickSort(numbers4))

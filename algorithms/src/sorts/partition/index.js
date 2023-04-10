@@ -157,6 +157,6 @@ function partitionLomuto(numbers = [], low = 0, hi = numbers.length - 1) {
 console.log(partitionLomuto(numbers1))
 
 module.exports = {
-  partition: partition,
+  partition2: partition2,
   // partitionLomuto: partitionLomuto
 };
