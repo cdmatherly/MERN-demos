@@ -31,6 +31,28 @@ const expected3 = [];
  * @returns {Array<number>} The sorted set intersection: a new array that is sorted and contains only the shared values
  *    between the two arrays de-duped.
  */
+
+function orderedIntersectionTry(sortedA, sortedB) {
+  let intersection = []
+  let map = {}
+
+  for (let i=0; i < sortedA.length; i++) {
+      for (let j=0; j<sortedB.length; j++) {
+          if (!map.hasOwnProperty(sortedB[j]) && (sortedA[i]===sortedB[j])) {
+              map[sortedB[j]]=sortedB[j]
+              continue;
+          }
+          else if (map.hasOwnProperty(sortedB[j])) {
+              continue;
+          }
+      }
+  }
+  for (key in map){
+      intersection.push(map[key])
+  }
+  return intersection
+}
+
 function orderedIntersection(sortedA, sortedB) {
   let idxA = 0;
   let idxB = 0;
