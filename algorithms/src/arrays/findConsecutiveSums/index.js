@@ -51,4 +51,29 @@ const expected5 = [
  *    this context means the numbers whose indexes are one after the other
  *    only.
  */
-function findConsecutiveSums(numbers, targetSum) {}
+function findConsecutiveSums(numbers, targetSum) {
+  let answers = []
+  for (i = 0; i < numbers.length; i++){
+    let sum = 0
+    let tempArr = []
+    for (j = i; j < numbers.length; j++){
+      sum += numbers[j]
+      tempArr.push(numbers[j])
+      if (sum === targetSum){
+        answers.push([...tempArr])
+        // break;
+      }
+      // can no longer do early exits with negatives
+      // // else if (sum > targetSum){
+      // //   break;
+      // // }
+    }
+  }
+  return answers;
+}
+
+console.log(findConsecutiveSums(numbers1, sum1))
+console.log(findConsecutiveSums(numbers2, sum2))
+console.log(findConsecutiveSums(numbers3, sum3))
+console.log(findConsecutiveSums(numbers4, sum4))
+console.log(findConsecutiveSums(numbers5, sum5))
