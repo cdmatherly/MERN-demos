@@ -55,8 +55,8 @@ function kMostFrequent(numbers, k) {
         : myTable[numbers[i]] = 1;
     }
 
-    let mostFrequentKey = undefined;
     while (k > 0) {
+      let mostFrequentKey = undefined;
       let mostFrequent = 0;
         for (let key in myTable) {
             if (myTable[key] > mostFrequent) {
