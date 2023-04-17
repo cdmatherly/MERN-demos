@@ -41,4 +41,19 @@ const expected2 = [
  *    like [key, val]
  * @returns {output}
  */
-function entries(obj) {}
+
+function entries(obj) {
+  const output = []
+  for (const key in obj){
+    if (obj.hasOwnProperty(key)){
+      const tempArr = []
+      tempArr.push(key)
+      tempArr.push(obj[key]);
+      output.push(tempArr);
+    }
+}
+return output;
+}
+
+console.log(entries(obj1));
+console.log(entries(obj2));
