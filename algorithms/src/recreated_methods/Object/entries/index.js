@@ -34,8 +34,8 @@ const expected2 = [
 
 /**
  * Returns a 2d array of key value pairs from the given obj.
- * - Time: O(?).
- * - Space: O(?).
+ * - Time: O(n) linear n = num of keys in obj.
+ * - Space: O(n) linear
  * @param {Object} obj
  * @typedef {Array<Array<string, any>>} output The nested array should look
  *    like [key, val]
