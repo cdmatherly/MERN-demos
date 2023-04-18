@@ -18,74 +18,74 @@
 
 const people = [
   {
-    firstName: 'John',
-    lastName: 'Doe',
+    firstName: "John",
+    lastName: "Doe",
   },
   {
-    firstName: 'Jane',
-    lastName: 'Doe',
+    firstName: "Jane",
+    lastName: "Doe",
   },
   {
-    firstName: 'Eddy',
-    lastName: 'Lee',
+    firstName: "Eddy",
+    lastName: "Lee",
   },
   {
-    firstName: 'John',
-    lastName: 'Fawn',
+    firstName: "John",
+    lastName: "Fawn",
   },
   {
-    firstName: 'Edward',
-    lastName: 'Kim',
+    firstName: "Edward",
+    lastName: "Kim",
   },
 ];
 
-const searchFor1 = 'Jo';
-const searchBy1 = 'firstName';
+const searchFor1 = "Jo";
+const searchBy1 = "firstName";
 const expected1 = [
   {
-    firstName: 'John',
-    lastName: 'Doe',
+    firstName: "John",
+    lastName: "Doe",
   },
   {
-    firstName: 'John',
-    lastName: 'Fawn',
+    firstName: "John",
+    lastName: "Fawn",
   },
 ];
 
-const searchFor2 = 'ohn';
-const searchBy2 = 'firstName';
+const searchFor2 = "ohn";
+const searchBy2 = "firstName";
 const expected2 = [];
 // Explanation: "John" contains "ohn", it does not start with "ohn"
 
-const searchFor3 = 'Do';
-const searchBy3 = 'lastName';
+const searchFor3 = "Do";
+const searchBy3 = "lastName";
 const expected3 = [
   {
-    firstName: 'John',
-    lastName: 'Doe',
+    firstName: "John",
+    lastName: "Doe",
   },
   {
-    firstName: 'Jane',
-    lastName: 'Doe',
+    firstName: "Jane",
+    lastName: "Doe",
   },
 ];
 
 // Bonus
-const searchFor4 = 'E';
-const searchBy4 = 'lastName';
-const searchMethod4 = 'includes';
+const searchFor4 = "E";
+const searchBy4 = "lastName";
+const searchMethod4 = "includes";
 const expected4 = [
   {
-    firstName: 'John',
-    lastName: 'Doe',
+    firstName: "John",
+    lastName: "Doe",
   },
   {
-    firstName: 'Jane',
-    lastName: 'Doe',
+    firstName: "Jane",
+    lastName: "Doe",
   },
   {
-    firstName: 'Eddy',
-    lastName: 'Lee',
+    firstName: "Eddy",
+    lastName: "Lee",
   },
 ];
 
@@ -99,4 +99,17 @@ const expected4 = [
  * @param {string} searchBy The key to search by.
  * @returns {Array<Objects>} The matched items.
  */
-function functionalFilterByKey(items, searchFor, searchBy) {}
+function functionalFilterByKey(items, searchFor, searchBy, searchMethod) {
+    const results = []
+    for (let i = 0; i < items.length; i++){
+        if (items[i][searchBy].toLowerCase().startsWith(searchFor.toLowerCase())) {
+            results.push(items[i])
+        }
+    }
+    return results
+}
+
+console.log(functionalFilterByKey(people, searchFor1, searchBy1))
+console.log(functionalFilterByKey(people, searchFor2, searchBy2))
+console.log(functionalFilterByKey(people, searchFor3, searchBy3))
+console.log(functionalFilterByKey(people, searchFor4, searchBy4))
