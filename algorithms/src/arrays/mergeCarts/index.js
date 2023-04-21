@@ -134,7 +134,7 @@ const expected4 = [hoodie];
  * @param {Product[]} wishList
  * @returns {Product[]} A new merged array that is deduped.
  */
-function mergeCarts(shoppingCart = [], wishList = []) {
+function mergeCarts1(shoppingCart = [], wishList = []) {
   // Initialize new array with all shopping cart items in it.
   const mergedCart = [...shoppingCart];
 
