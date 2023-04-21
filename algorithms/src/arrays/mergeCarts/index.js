@@ -137,4 +137,25 @@ so they are fresh copies of the products and not references.
  * @param {Product[]} wishList
  * @returns {Product[]} A new merged array that is deduped.
  */
-function mergeCarts(shoppingCart, wishList) {}
+
+function mergeCarts(shoppingCart, wishList) {
+    // console.log(shoppingCart);
+    // console.log(wishList);
+    const resultsArr = [];
+    const seenItems= {};
+    for(let i = 0; i <shoppingCart.length; i++){
+        seenItems[shoppingCart[i]["id"]]= shoppingCart[i];
+    }
+    for(let z = 0; z <wishList.length; z++){
+        seenItems[wishList[z]["id"]]= wishList[z];
+    }
+    // console.log(seenItems);
+    for( key in seenItems){
+        resultsArr.push(new Product(seenItems[key].id,seenItems[key].name,seenItems[key].price,seenItems[key].href))
+    }
+    return(resultsArr);
+}
+console.log(mergeCarts(shoppingCart1,wishList1));
+console.log(mergeCarts(shoppingCart2,wishList2));
+console.log(mergeCarts(shoppingCart3,wishList3));
+console.log(mergeCarts(shoppingCart4,wishList4));
