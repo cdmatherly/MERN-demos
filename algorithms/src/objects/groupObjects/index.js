@@ -80,4 +80,16 @@ const expected = {
  * @returns {Object<string, Array<Object>>} The hash category hash table with
  *    string keys and array of objects as values.
  */
-function groupObjects(items) {}
+function groupObjects(items) {
+  const table = {}
+  for (let i = 0; i < items.length; i++){
+    const categoryName = items[i].category.toLowerCase()
+    if (!table.hasOwnProperty(categoryName)){
+      table[categoryName] = []
+    }
+    table[categoryName].push(items[i])
+  }
+  return table
+}
+
+console.log(groupObjects(objects))
