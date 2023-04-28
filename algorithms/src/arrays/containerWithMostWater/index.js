@@ -24,8 +24,6 @@ const expected3 = 16;
 const heights4 = [1, 2, 1];
 const expected4 = 2;
 
-const heights5 = [1, 2,1,1,1,1,1,3,4,5,67,87,56,8,346,99,8,9,5,4325,357,8,234,513,6]
-
 /**
  * Finds the container that can hold the most water based on it's area.
  * A container's length is the distance between indexes and the two sides are
@@ -36,7 +34,7 @@ const heights5 = [1, 2,1,1,1,1,1,3,4,5,67,87,56,8,346,99,8,9,5,4325,357,8,234,51
  * @param {number[]} heights
  * @returns {number} Representing the max area of a container.
  */
-function containerWithMostWater(heights) {
+function containerWithMostWater2(heights) {
     let a = 0
     let b = heights.length - 1
     let area = 0
@@ -64,7 +62,65 @@ function containerWithMostWater(heights) {
 //         }
 //     }
 //     return maxArea
-// }
+// 
+  let max = 0;
+
+  for (let i = 0; i < heights.length; i++) {
+    for (let j = i + 1; j < heights.length; j++) {
+      // x axis.
+      const length = j - i;
+      // y axis. Limited by shorter wall since water overflows the short side.
+      const height = Math.min(heights[i], heights[j]);
+      const area = length * height;
+      area > max && (max = area);
+    }
+  }
+  return max;
+}
+
+/* 
+Unit Testing example using built in deprecating node testing library.
+You should use a library like jasmine instead, but if you don't have
+access to it, this could help for some quick testing.
+
+If no errors are logged to the terminal then the tests passed.
+There are multiple comparison methods that can be used, e.g.,
+strictEqual for comparing primitives and deepStrictEqual for collections.
+*/
+const { strictEqual } = require('assert');
+
+/* 
+Using an array here and the .forEach just helps avoid having to copy paste
+The function calls for each test case and the extra error message we gave.
+
+The values don't have to be stored in vars above, they can be written in
+like the first case then the vars above could be deleted.
+*/
+const testCases = [
+  {
+    args: [[1, 8, 6, 2, 5, 4, 8, 3, 7]],
+    expected: 49,
+    description: 'a wide container solution ignoring first',
+  },
+  { args: [heights2], expected: expected2, description: 'two same heights' },
+  {
+    args: [heights3],
+    expected: expected3,
+    description: 'a whole container solution',
+  },
+  {
+    args: [heights4],
+    expected: expected4,
+    description: 'a whole container solution with short sides',
+  },
+];
+
+// testCases.forEach((testData, i) => {});
+testCases.forEach(({ args, expected, description }, i) => {
+  const actual = containerWithMostWater(...args);
+
+  strictEqual(actual, expected, description);
+});
 
 console.log(containerWithMostWater(heights1))
 console.log(containerWithMostWater(heights2))
